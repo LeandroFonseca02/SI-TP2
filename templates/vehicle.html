@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+<main class="content">
+  <div class="container-fluid p-0">
+
+    <div class="row">
+      <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+        <div class="card flex-fill">
+          <div class="card-header">
+
+            <h5 class="card-title mb-0">Vehicles</h5>
+            <button class="btn btn-success mt-3">Create Vehicle</button>
+          </div>
+          <table class="table table-hover my-0">
+            <thead>
+            <tr>
+              <th>Id</th>
+              <th class="d-none d-xl-table-cell">User Id</th>
+              <th class="d-none d-xl-table-cell">License Plate</th>
+              <th class="d-none d-xl-table-cell">Brand</th>
+              <th class="d-none d-xl-table-cell">Model</th>
+              <th class="d-none d-xl-table-cell">Color</th>
+              <th class="d-none d-xl-table-cell">Is Deleted</th>
+              <th class="d-none d-xl-table-cell">Created At</th>
+              <th class="d-none d-xl-table-cell">Updated At</th>
+              <th class="d-none d-xl-table-cell">Actions</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for vehicle in vehicles %}
+            <tr>
+              <td>{{ vehicle.id }}</td>
+              <td class="d-none d-xl-table-cell">{{ vehicle.user_id }}</td>
+              <td class="d-none d-xl-table-cell">{{ vehicle.license_plate }}</td>
+              <td class="d-none d-xl-table-cell">{{ vehicle.brand }}</td>
+              <td class="d-none d-xl-table-cell">{{ vehicle.model }}</td>
+              <td class="d-none d-xl-table-cell">{{ vehicle.color }}</td>
+              <td class="d-none d-xl-table-cell">
+                {% if vehicle.is_deleted==True %}
+                <span class="badge bg-success">{{ vehicle.is_deleted }}</span>
+                {% else %}
+                <span class="badge bg-danger">{{ vehicle.is_deleted }}</span>
+                {% endif %}
+              </td>
+              <td class="d-none d-xl-table-cell">{{ vehicle.created_at }}</td>
+              <td class="d-none d-xl-table-cell">{{ vehicle.updated_at }}</td>
+              <td class="d-none d-md-table-cell">
+                <button class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit align-middle me-2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                </button>
+                <button class="btn btn-danger">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 align-middle me-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+{% endblock %}
