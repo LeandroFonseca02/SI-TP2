@@ -10,7 +10,7 @@ reservations = Blueprint('reservations', __name__, template_folder='templates')
 @reservations.route('/reservations')
 def reservations_template():
     all_reservations = Reservation.get_all_reservations()
-    return render_template('reservation.html', reservations=all_reservations)
+    return render_template('reservation.html', reservations=all_reservations, page='Reservations')
 
 
 @reservations.route('/reservation/<ride_id>', methods=['POST'])

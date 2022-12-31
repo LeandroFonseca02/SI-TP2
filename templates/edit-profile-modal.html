@@ -1,0 +1,53 @@
+<div class="modal fade" id="editProfileModal{{profile.id}}" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editProfileModalLabel{{profile.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel{{profile.id}}">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="/editProfile/{{profile.id}}" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                        {{form.id.label(class_='form-label')}}
+                        {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.user_id.label(class_='form-label')}}
+                        {{form.user_id(class_='form-control input-shadow form-ismat', placeholder='User Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.first_name.label(class_='form-label')}}
+                        {{form.first_name(class_='form-control input-shadow form-ismat', placeholder='Nome Próprio')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.last_name.label(class_='form-label')}}
+                        {{form.last_name(class_='form-control input-shadow form-ismat', placeholder='Apelido')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.registration_date.label(class_='form-label')}}
+                        {{form.registration_date(class_='form-control input-shadow form-ismat',
+                        placeholder='Registration Date')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.photo.label(class_='form-label')}}
+                        {{form.photo(class_='form-control input-shadow form-ismat', placeholder='Photo')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.phone.label(class_='form-label')}}
+                        {{form.phone(class_='form-control input-shadow form-ismat', placeholder='Phone Number')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.classification.label(class_='form-label')}}
+                        {{form.classification(class_='form-control input-shadow form-ismat',
+                        placeholder='Classification')}}
+                    </div>
+                    <div class="col-12 d-grid">
+                        <button type="submit" class="btn-ismat-large">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

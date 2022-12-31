@@ -13,6 +13,123 @@ function getVehicles() {
     });
 }
 
+function deleteUser(user_id) {
+    fetch('/deleteuser/'+user_id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
+function deleteProfile(profile_id) {
+    fetch('/deleteprofile/'+profile_id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
+function deleteVehicle(vehicle_id) {
+    fetch('/deletevehicle/'+vehicle_id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
+function getEditUserModal(user_id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditUserModal/'+user_id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editUserModal"+user_id).modal("toggle");
+
+    });
+}
+
+function getEditProfileModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditProfileModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editProfileModal"+id).modal("toggle");
+
+    });
+}
+
+function getEditVehicleModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditVehicleModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editVehicleModal"+id).modal("toggle");
+
+    });
+}
+
+function getDeleteUserModal(user_id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteUserModal/'+user_id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#deleteUserModal"+user_id).modal("toggle");
+
+    });
+}
+
+function getDeleteProfileModal(profile_id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteProfileModal/'+profile_id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#deleteProfileModal"+profile_id).modal("toggle");
+
+    });
+}
+
+function getDeleteVehicleModal(vehicle_id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteVehicleModal/'+vehicle_id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        console.log(vehicle_id)
+        $("#deleteVehicleModal"+vehicle_id).modal("toggle");
+    });
+}
+
+function createUser(element) {
+    table = document.getElementById("tableUsers");
+    element.submit();
+    fetch('/updateuserstable', {
+            method:"GET",
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        table.innerHTML = html;
+    });
+}
+
 function deleteVehicles(vehicle_id) {
     fetch('/deleteVehicle/'+vehicle_id, {
             method:"PATCH",

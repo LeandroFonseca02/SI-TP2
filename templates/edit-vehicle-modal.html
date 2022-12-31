@@ -1,0 +1,56 @@
+<div class="modal fade" id="editVehicleModal{{vehicle.id}}" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editVehicleModalLabel{{vehicle.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editVehicleModalLabel{{vehicle.id}}">Edit Vehicle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="/editVehicle/{{vehicle.id}}" method="POST">
+                    <div class="col-md-6">
+                        {{form.id.label(class_='form-label')}}
+                        {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.user_id.label(class_='form-label')}}
+                        {{form.user_id(class_='form-control input-shadow form-ismat', placeholder='User Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.license_plate.label(class_='form-label')}}
+                        {{form.license_plate(class_='form-control input-shadow form-ismat', placeholder='License
+                        Plate')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.brand.label(class_='form-label')}}
+                        {{form.brand(class_='form-control input-shadow form-ismat', placeholder='Brand')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.model.label(class_='form-label')}}
+                        {{form.model(class_='form-control input-shadow form-ismat', placeholder='Model')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.color.label(class_='form-label')}}
+                        {{form.color(class_='form-control input-shadow form-ismat', placeholder='Color')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.is_deleted.label(class_='form-label')}}
+                        {{form.is_deleted(class_='form-control input-shadow form-ismat', placeholder='Is Deleted')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.created_at.label(class_='form-label')}}
+                        {{form.created_at(class_='form-control input-shadow form-ismat', placeholder='Created at')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.updated_at.label(class_='form-label')}}
+                        {{form.updated_at(class_='form-control input-shadow form-ismat', placeholder='Updated at')}}
+                    </div>
+                    <div class="col-12 d-grid">
+                        <button type="submit" class="btn-ismat-large">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

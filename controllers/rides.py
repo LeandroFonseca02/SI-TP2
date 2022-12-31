@@ -12,7 +12,7 @@ rides = Blueprint('rides', __name__, template_folder='templates')
 @rides.route('/rides')
 def rides_template():
     all_rides = Ride.get_all_rides()
-    return render_template('rides.html', rides=all_rides)
+    return render_template('rides.html', rides=all_rides, page='Rides')
 
 
 @rides.route('/createRide', methods=['POST'])

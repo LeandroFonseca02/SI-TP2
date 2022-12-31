@@ -1,0 +1,23 @@
+
+<div class="modal fade" id="deleteProfileModal{{profile.id}}"
+     data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="deleteProfileModalLabel{{profile.id}}"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem a certeza que quer apagar o perfil com id {{ profile.id }} do user com id {{ profile.user_id }}?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/profiles" name="{{profile.id}}" class="btn btn-success" data-bs-dismiss="modal"
+                        onclick="deleteProfile(this.name)">Sim
+                </a>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>

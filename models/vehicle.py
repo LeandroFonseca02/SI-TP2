@@ -41,8 +41,24 @@ class Vehicle(db.Model):
         return db.session.query(Vehicle).filter(Vehicle.id == id, Vehicle.is_deleted == False).first()
 
     @staticmethod
+    def get_vehicle_by_id_admin(id):
+        return db.session.query(Vehicle).filter(Vehicle.id == id).first()
+
+    @staticmethod
     def create_vehicle(user_id, brand, model, color, license_plate):
         vehicle = Vehicle(user_id=user_id, license_plate=license_plate, color=color, brand=brand, model=model)
+        db.session.add(vehicle)
+        db.session.commit()
+
+    @staticmethod
+    def create_vehicle_admin(id, user_id, brand, model, color, license_plate, is_deleted, created_at, updated_at):
+        vehicle = Vehicle(user_id=int(user_id), license_plate=license_plate, color=color, brand=brand, model=model, is_deleted=eval(is_deleted))
+        if len(created_at) != 0:
+            vehicle.created_at = created_at
+        if len(updated_at) != 0:
+            vehicle.updated_at = updated_at
+        if len(id) != 0:
+            vehicle.id = id
         db.session.add(vehicle)
         db.session.commit()
 
@@ -53,9 +69,28 @@ class Vehicle(db.Model):
         db.session.commit()
 
     @staticmethod
+    def delete_vehicle_admin(vehicle_id):
+        db.session.query(Vehicle).filter(Vehicle.id == vehicle_id).delete()
+        db.session.commit()
+
+    @staticmethod
     def get_vehicle_id_by_license_plate(license_plate):
         vehicle = db.session.query(Vehicle).filter(Vehicle.license_plate == license_plate).first()
         return vehicle.id
+
+
+    @staticmethod
+    def edit_vehicle(vehicle, id, user_id, license_plate, brand, model, color, is_deleted, created_at, update_at):
+        vehicle.id = id
+        vehicle.user_id = user_id
+        vehicle.license_plate = license_plate
+        vehicle.brand = brand
+        vehicle.model = model
+        vehicle.color = color
+        vehicle.is_deleted = eval(is_deleted)
+        vehicle.created_at = created_at
+        vehicle.updated_at = update_at
+        db.session.commit()
 
     # def __init__(self, user_id, license_plate, color, is_deleted, brand, model, created_at, updated_at):
     #     self.user_id = user_id

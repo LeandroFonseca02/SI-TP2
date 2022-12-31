@@ -1,6 +1,4 @@
 from flask import Flask, render_template
-from flask_login import login_required, current_user
-
 from config.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_TRACK_MODIFICATIONS, SECRET_KEY, MAIL_SERVER, MAIL_PORT, \
     MAIL_USERNAME, MAIL_PASSWORD, MAIL_USE_TLS, MAIL_USE_SSL
 from controllers.profiles import UPLOAD_FOLDER, profiles
@@ -11,9 +9,6 @@ from controllers.vehicles import vehicles
 from controllers.users import users
 from controllers.auth import auth, login_manager
 from controllers.db import db
-from models.profile import Profile
-from models.ride import Ride
-from models.vehicle import Vehicle
 from utils import mail
 
 app = Flask(__name__)
@@ -47,7 +42,7 @@ with app.app_context():
 
 @app.route('/')
 def index_template():
-    return render_template('index.html')
+    return render_template('index.html', page='Dashboard')
 
 
 app.register_blueprint(auth)

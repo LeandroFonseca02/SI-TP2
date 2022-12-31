@@ -4,58 +4,62 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-  <meta name="author" content="AdminKit">
-  <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
-  <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
   <title></title>
 
   <link href="../static/css/main.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
+
 <body>
 
-<button data-bs-toggle="modal" data-bs-target="#modalUserRoles">asd</button>
+
+<button data-bs-toggle="modal" data-bs-target="#modalCreateUser">asd</button>
 
 <!-- Modal Users-->
-<div class="modal fade" id="modalUsers" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalCreateUser" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="modalCreateUserLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Users</h5>
+        <h5 class="modal-title" id="modalCreateUserLabel">Users</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="row g-3" action="/createRide" method="POST">
+        <form class="row g-3" action="/createUser" method="POST">
           <div class="col-md-6">
-            <label class="form-label">ID</label>
-            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo">
+            {{form.id.label(class_='form-label')}}
+            {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+<!--            <label class="form-label">ID</label>-->
+<!--            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo">-->
           </div>
           <div class="col-md-6">
-            <label for="inputCriarLugaresDisponiveis" class="form-label">Email</label>
-            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"
-                   placeholder="Lugares Disponíveis" id="inputCriarLugaresDisponiveis">
+            {{form.email.label(class_='form-label')}}
+            {{form.email(class_='form-control input-shadow form-ismat', placeholder='Email')}}
+<!--            <label for="inputCriarLugaresDisponiveis" class="form-label">Email</label>-->
+<!--            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"-->
+<!--                   placeholder="Lugares Disponíveis" id="inputCriarLugaresDisponiveis">-->
           </div>
           <div class="col-md-6">
-            <label for="inputCriarOrigem" class="form-label">Password</label>
-            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
-                   placeholder="Origem" id="inputCriarOrigem">
+            {{form.password.label(class_='form-label')}}
+            {{form.password(class_='form-control input-shadow form-ismat', placeholder='Password')}}
+<!--            <label for="inputCriarOrigem" class="form-label">Password</label>-->
+<!--            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"-->
+<!--                   placeholder="Origem" id="inputCriarOrigem">-->
           </div>
           <div class="col-md-6">
-            <label for="inputVeiculo" class="form-label">Active</label>
-            <select class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
-                    id="inputVeiculo">
-              <option selected> True </option>
-              <option selected> False </option>
-            </select>
+            {{form.active.label(class_='form-label')}}
+            {{form.active(class_='form-control input-shadow form-ismat', placeholder='Active')}}
+<!--            <label for="inputVeiculo" class="form-label">Active</label>-->
+<!--            <select class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"-->
+<!--                    id="inputVeiculo">-->
+<!--              <option selected> True </option>-->
+<!--              <option selected> False </option>-->
+<!--            </select>-->
           </div>
           <div class="col-12 d-grid">
             <button type="submit" class="btn-ismat-large">Criar</button>

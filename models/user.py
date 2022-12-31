@@ -24,7 +24,6 @@ class User(db.Model, UserMixin):
         "Role", secondary=roles_users_table, backref="user", lazy=True
     )
 
-
     @staticmethod
     def get_all_users():
         return db.session.query(User).all()
@@ -43,7 +42,6 @@ class User(db.Model, UserMixin):
         user.email = email
         db.session.commit()
 
-
     @staticmethod
     def update_password(id, password):
         user = User.get_user_by_id(id)
@@ -51,11 +49,34 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     @staticmethod
-    def create_user(email,password):
+    def create_user(email, password):
         user = User(email=email, password=password)
         db.session.add(user)
         db.session.commit()
         return user
+
+    @staticmethod
+    def create_user_admin(id, email, password, active):
+        if id is None:
+            user = User(email=email, password=password, active=eval(active))
+        else:
+            user = User(id=id, email=email, password=password, active=eval(active))
+        db.session.add(user)
+        db.session.commit()
+
+
+    @staticmethod
+    def edit_user(user, id, email, password, active):
+        user.id = int(id)
+        user.email = email
+        user.password = password
+        user.active = eval(active)
+        db.session.commit()
+
+    @staticmethod
+    def delete_user(id):
+        db.session.query(User).filter(User.id == int(id)).delete()
+        db.session.commit()
 
     def has_role(self, role):
         query = db.session.query(Role).filter(Role.name == role).first()
@@ -74,9 +95,9 @@ class User(db.Model, UserMixin):
             'user_id': self.id
         }
         encoded_jwt = jwt.encode(
-                payload,
-                str(SECRET_KEY),
-                algorithm='HS256'
+            payload,
+            str(SECRET_KEY),
+            algorithm='HS256'
         )
 
         return encoded_jwt
