@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+from flask_login import login_required, current_user
+
 from config.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_TRACK_MODIFICATIONS, SECRET_KEY, MAIL_SERVER, MAIL_PORT, \
     MAIL_USERNAME, MAIL_PASSWORD, MAIL_USE_TLS, MAIL_USE_SSL
 from controllers.profiles import UPLOAD_FOLDER, profiles
@@ -9,8 +11,10 @@ from controllers.vehicles import vehicles
 from controllers.users import users
 from controllers.auth import auth, login_manager
 from controllers.db import db
+from models.profile import Profile
 from models.reservation import Reservation
 from models.ride import Ride
+from models.role import Role
 from models.user import User
 from utils import mail
 
@@ -34,22 +38,15 @@ with app.app_context():
     db.init_app(app)
 
 
-# @app.route('/', methods=['POST', 'GET'])
-# @login_required
-# def index():
-#     rides = Ride.get_index_rides(current_user.id)
-#     profile = Profile.get_profile(current_user.id)
-#     vehicles = Vehicle.get_vehicles_by_userid(current_user.id)
-#     return render_template('index.html', profile=profile, title='Boleias ISMAT', rides=rides, vehicles=vehicles)
-
-
 @app.route('/')
+@login_required
 def index_template():
     rides = Ride.get_number_all_rides()
     rides_completed = Ride.get_number_completed_rides()
     users = User.get_number_users()
     reservations = Reservation.get_number_reservations()
-    return render_template('index.html', page='Dashboard', users=users, rides=rides, rides_completed=rides_completed, reservations=reservations)
+    profile = Profile.get_profile_by_id(current_user.id)
+    return render_template('index.html', page='Dashboard', users=users, rides=rides, rides_completed=rides_completed, reservations=reservations, profile=profile)
 
 
 app.register_blueprint(auth)

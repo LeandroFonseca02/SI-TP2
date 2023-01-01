@@ -1,26 +1,27 @@
 import os
-from flask import Blueprint, request, redirect, render_template, jsonify
+from flask import Blueprint, request, redirect, render_template
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 
 from config.config import UPLOAD_FOLDER
 from forms import CreateProfileForm
 from models.profile import Profile
-from models.ride import Ride
-from models.user import User
 
 
 profiles = Blueprint('profiles', __name__, template_folder='templates')
 
 
 @profiles.route('/profiles')
+@login_required
 def profiles_template():
     form = CreateProfileForm()
     all_profiles = Profile.get_all_profiles()
-    return render_template('profile.html', profiles=all_profiles, page='Profiles', form=form)
+    profile = Profile.get_profile_by_id(current_user.id)
+    return render_template('profile.html', profiles=all_profiles, page='Profiles', form=form, profile=profile)
 
 
 @profiles.route('/createProfile', methods=['GET', 'POST'])
+@login_required
 def create_profile():
     form = CreateProfileForm()
     if form.is_submitted():
@@ -40,12 +41,14 @@ def create_profile():
 
 
 @profiles.route('/getDeleteProfileModal/<profile_id>', methods=['GET'])
+@login_required
 def get_delete_user_modal(profile_id):
     profile = Profile.get_profile_by_id(profile_id)
     return render_template('delete-profile-modal.html', profile=profile)
 
 
 @profiles.route('/getEditProfileModal/<profile_id>', methods=['GET'])
+@login_required
 def get_edit_profile_modal(profile_id):
     profile = Profile.get_profile_by_id(profile_id)
     form = CreateProfileForm(id=profile.id, user_id=profile.user_id, first_name=profile.first_name, last_name=profile.last_name, registration_date=profile.registration_date, phone=profile.phone_number, photo=profile.photo, classification=profile.classification)
@@ -54,11 +57,12 @@ def get_edit_profile_modal(profile_id):
 
 
 @profiles.route('/editProfile/<id>', methods=['POST'])
+@login_required
 def update_user(id):
     form = request.form
     profile = Profile.get_profile_by_id(id)
     f = request.files['photo']
-    if f.content_length != 0:
+    if f.filename != '':
         filename = secure_filename(f.filename)
         f.save(os.path.join(UPLOAD_FOLDER, filename))
         photo = UPLOAD_FOLDER + filename
@@ -74,67 +78,7 @@ def update_user(id):
 
 
 @profiles.route('/deleteprofile/<profile_id>', methods=['DELETE'])
+@login_required
 def delete_profile(profile_id):
     Profile.delete_user(profile_id)
     return redirect('/users')
-
-
-@profiles.route('/profile', methods=['GET'])
-@login_required
-def profile():
-    profile = Profile.get_profile(current_user.id)
-    return render_template('perfil.html', email=current_user.email, profile=profile)
-
-
-@profiles.route('/uploadImage', methods=['POST'])
-@login_required
-def uploadImage():
-    if request.method == 'POST':
-        f = request.files['file']
-        filename = secure_filename(f.filename)
-        f.save(os.path.join(UPLOAD_FOLDER, filename))
-        Profile.update_photo(current_user.id, UPLOAD_FOLDER + filename)
-        return redirect("/profile")
-
-
-@profiles.route('/updateProfileData', methods=['POST'])
-@login_required
-def updateProfileData():  # put application's code here
-    if request.method == 'POST':
-        email = request.form.get('email')
-        firstname = request.form.get('firstname')
-        lastname = request.form.get('lastname')
-        phone = request.form.get('phone')
-        User.update_email(current_user.id, email)
-        Profile.update_name_phone(current_user.id,firstname,lastname,phone)
-        return redirect("/profile")
-
-
-@profiles.route('/getRideRating/<ride_id>', methods=['GET'])
-@login_required
-def getPassengersRating(ride_id):
-    passengers = Ride.get_ride_passengers(ride_id)
-    dict = {
-        "ride_id": ride_id,
-        "passengers":[]
-    }
-    for passenger in passengers:
-        dict['passengers'].append({'passenger_id': passenger[0], 'passenger_classification': passenger[6]})
-
-    return jsonify(dict)
-
-
-@profiles.route('/getProfileModal/<user_id>', methods=['GET'])
-@login_required
-def getProfileModal(user_id):
-    user = User.get_user_by_id(user_id)
-    profile = Profile.get_profile(user_id)
-
-    return render_template('profile-modal.html',email=user.email,profile=profile)
-
-
-@profiles.route('/getUserRating/<user_id>', methods=['GET'])
-@login_required
-def getUserRating(user_id):
-    profile = Profile.get_profile(user_id)
-    return jsonify(rating=profile.classification)

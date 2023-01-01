@@ -64,7 +64,6 @@ class User(db.Model, UserMixin):
         db.session.add(user)
         db.session.commit()
 
-
     @staticmethod
     def edit_user(user, id, email, password, active):
         user.id = int(id)
@@ -116,23 +115,27 @@ class User(db.Model, UserMixin):
 
         return data.get('user_id')
 
-
     @staticmethod
     def add_role(user_id, role_id):
-        user = User.get_user_by_id(user_id)
-        user.roles.append(role_id)
+        query = "INSERT INTO role_user VALUES (" + user_id + ", " + role_id + ")"
+        db.session.execute(query)
         db.session.commit()
-
 
     @staticmethod
     def get_number_users():
         return len(db.session.query(User).all())
 
-    # def __repr__(self):
-    #     return "<User %r>" % self.email
+    @staticmethod
+    def delete_role_to_user(user_id, role_id):
+        query = "DELETE FROM role_user WHERE user_id = " + user_id + " AND role_id = " + role_id
+        db.session.execute(query)
+        db.session.commit()
 
-    # def __init__(self, email, password, active):
-    #     self.email = email
-    #     self.password = password
-    #     self.active = active
-    #
+    @staticmethod
+    def verify_user_has_role(user_id, role_id):
+        query = "SELECT * FROM role_user WHERE user_id = " + str(user_id) + " AND role_id = " + str(role_id)
+        checker = db.session.execute(query)
+        if checker.rowcount == 0:
+            return False
+        else:
+            return True

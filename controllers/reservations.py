@@ -9,36 +9,16 @@ reservations = Blueprint('reservations', __name__, template_folder='templates')
 
 
 @reservations.route('/reservations')
+@login_required
 def reservations_template():
     form = CreateReservationForm()
     all_reservations = Reservation.get_all_reservations()
-    return render_template('reservation.html', reservations=all_reservations, page='Reservations', form=form)
-
-
-@reservations.route('/reservation/<ride_id>', methods=['POST'])
-@login_required
-def reservation(ride_id):
-    Reservation.create_reservation(Reservation(user_id=current_user.id, ride_id=int(ride_id)))
-    return "reserva concluida"
-
-
-@reservations.route('/minhasReservas', methods=['GET'])
-@login_required
-def minhasReservas():
-    profile = Profile.get_profile(current_user.id)
-    reservas = Reservation.get_active_reservations(current_user.id)
-    historicos = Reservation.get_historic_reservations(current_user.id)
-    return render_template('minhasReservas.html', profile=profile, reservas=reservas, historicos=historicos)
-
-
-@login_required
-@reservations.route('/cancel/reservation/<ride_id>', methods=['POST'])
-def cancelReservation(ride_id):
-    Reservation.cancel_reservation(ride_id, current_user.id)
-    return redirect('/minhasReservas')
+    profile = Profile.get_profile_by_id(current_user.id)
+    return render_template('reservation.html', reservations=all_reservations, page='Reservations', form=form, profile=profile)
 
 
 @reservations.route('/createReservation', methods=['POST'])
+@login_required
 def createReservation():
     form = request.form
     Reservation.create_reservation_admin(id=form.get('id'), user_id=form.get('user_id'), ride_id=form.get('ride_id'),
@@ -49,6 +29,7 @@ def createReservation():
 
 
 @reservations.route('/editReservation/<reservation_id>', methods=['POST'])
+@login_required
 def update_reservation(reservation_id):
     form = request.form
     reservation = Reservation.get_reservation_by_id(reservation_id)
@@ -60,18 +41,21 @@ def update_reservation(reservation_id):
 
 
 @reservations.route('/deletereservation/<reservation_id>', methods=['DELETE'])
+@login_required
 def delete_reservation(reservation_id):
     Reservation.delete_reservation_admin(reservation_id)
     return redirect('/reservations')
 
 
 @reservations.route('/getDeleteReservationModal/<reservation_id>', methods=['GET'])
+@login_required
 def get_delete_reservation_modal(reservation_id):
     reservation = Reservation.get_reservation_by_id(reservation_id)
     return render_template('delete-reservation-modal.html', reservation=reservation)
 
 
 @reservations.route('/getEditReservationModal/<reservation_id>', methods=['GET'])
+@login_required
 def get_edit_reservation_modal(reservation_id):
     reservation = Reservation.get_reservation_by_id(reservation_id)
     form = CreateReservationForm(id=reservation.id, user_id=reservation.user_id, ride_id=reservation.ride_id,

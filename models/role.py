@@ -57,5 +57,6 @@ class Role(db.Model, RoleMixin):
     def get_role_by_id(id):
         return db.session.query(Role).filter(Role.id == int(id)).first()
 
-
-
+    @staticmethod
+    def get_role_id_by_name(name):
+        return db.session.query(Role).filter(Role.name == name).first().id

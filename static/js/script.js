@@ -1,10 +1,3 @@
-function toggleDropdown() {
-    // dropdown = document.querySelector('.dropdown-menu');
-    // dropdown.closable = true;
-    // $('.dropdown-menu').dropdown('toggle')
-}
-
-
 function sendUploadImage() {
     document.getElementById("photoForm").submit();
 }

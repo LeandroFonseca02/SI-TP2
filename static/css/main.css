@@ -245,3 +245,11 @@
 .sidebar-link i, .sidebar-link svg, a.sidebar-link i, a.sidebar-link svg {
     color: var(--ismat-ligth)!important;
 }
+
+.fullscreen{
+    position: absolute;
+    bottom:0%;
+    right:0%;
+    left:0%;
+    top:0%;
+}

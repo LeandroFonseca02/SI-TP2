@@ -1,14 +1,14 @@
-<div class="modal fade" id="editRoleUserModal{{userrole.role_id}}{{userrole.user_id}}" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="editRoleUserModalLabel{{userrole.role_id}}{{userrole.user_id}}" aria-hidden="true">
+<div class="modal fade" id="editRoleUserModal{{user_id}}{{role_id}}" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editRoleUserModalLabel{{user_id}}{{role_id}}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editRoleUserModalLabel{{userrole.role_id}}{{userrole.user_id}}">Edit User Role</h5>
+                <h5 class="modal-title" id="editRoleUserModalLabel{{user_id}}{{role_id}}">Edit User Role</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3" action="/editRoleUser/{{userrole.role_id}}/{{userrole.user_id}}" method="POST">
+                <form class="row g-3" action="/editRoleUser/{{user_id}}/{{role_id}}" method="POST">
                     <div class="col-md-6">
                         {{form.user_id.label(class_='form-label')}}
                         {{form.user_id(class_='form-control input-shadow form-ismat', placeholder='User Id')}}
