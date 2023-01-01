@@ -1,0 +1,31 @@
+<div class="modal fade" id="editRoleModal{{role.id}}" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editRoleModalLabel{{role.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRoleModalLabel{{role.id}}">Edit Ride</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="/editRole/{{role.id}}" method="POST">
+                    <div class="col-md-6">
+                        {{form.id.label(class_='form-label')}}
+                        {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.name.label(class_='form-label')}}
+                        {{form.name(class_='form-control input-shadow form-ismat', placeholder='Name')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.description.label(class_='form-label')}}
+                        {{form.description(class_='form-control input-shadow form-ismat', placeholder='Description')}}
+                    </div>
+                    <div class="col-12 d-grid">
+                        <button type="submit" class="btn-ismat-large">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

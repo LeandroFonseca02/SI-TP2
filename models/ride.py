@@ -139,6 +139,47 @@ class Ride(db.Model):
         return db.session.execute(query).all()
 
 
+    @staticmethod
+    def create_ride_admin(id, user_id, vehicle_id, date, hour, seats, status, origin, destination, description, created_at, updated_at):
+        ride = Ride(user_id=int(user_id), vehicle_id=int(vehicle_id), ride_date=date, ride_hour=hour, number_of_available_seats=int(seats), status=status, origin=origin, destination=destination, description=description)
+        if len(id) != 0:
+            ride.id = id
+        if len(created_at) != 0:
+            ride.created_at = created_at
+        if len(updated_at) != 0:
+            ride.updated_at = updated_at
+        db.session.add(ride)
+        db.session.commit()
+
+    @staticmethod
+    def delete_ride_admin(ride_id):
+        db.session.query(Ride).filter(Ride.id == int(ride_id)).delete()
+        db.session.commit()
+
+    @staticmethod
+    def edit_ride(ride, id, user_id, vehicle_id, date, hour, seats, status, origin, destination, description, created_at, updated_at):
+        ride.id = id
+        ride.user_id = user_id
+        ride.vehicle_id = vehicle_id
+        ride.ride_date = date
+        ride.ride_hour = hour
+        ride.number_of_available_seats = seats
+        ride.status = status
+        ride.origin = origin
+        ride.description = destination
+        ride.description = description
+        ride.created_at = created_at
+        ride.updated_at = updated_at
+        db.session.commit()
+
+
+    @staticmethod
+    def get_number_all_rides():
+        return len(db.session.query(Ride).all())
+
+    @staticmethod
+    def get_number_completed_rides():
+        return len(db.session.query(Ride).filter(Ride.status == 'Concluida').all())
         # def __init__(self, user_id, vehicle_id, ride_date, number_of_available_seats, status, origin, destination,
         #              created_at, updated_at):
         #     self.user_id = user_id

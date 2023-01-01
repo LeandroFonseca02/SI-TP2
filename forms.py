@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from wtforms import StringField, PasswordField, EmailField, ValidationError, IntegerField, SelectField, DateTimeField, \
-    FileField, DecimalField
+    FileField, DecimalField, DateField, TimeField
 from wtforms.validators import InputRequired, Length, Optional, NumberRange
 from models.user import User
 
@@ -68,3 +68,39 @@ class CreateVehicleForm(FlaskForm):
     is_deleted = SelectField('Is Deleted', validators=[InputRequired()], choices=[('False', 'False'), ('True', 'True')])
     created_at = DateTimeField('Created at', validators=[Optional()])
     updated_at = DateTimeField('Updated at', validators=[Optional()])
+
+
+class CreateRideForm(FlaskForm):
+    id = IntegerField('Id', validators=[Optional()])
+    user_id = IntegerField('User Id', validators=[InputRequired()])
+    vehicle_id = IntegerField('Vehicle Id', validators=[InputRequired()])
+    date = DateField('Ride Date', validators=[InputRequired()])
+    hour = TimeField('Ride Hours', validators=[InputRequired()])
+    seats = IntegerField('Available Seats', validators=[InputRequired()])
+    status = SelectField('Status', validators=[InputRequired()], choices=[('Aberta', 'Aberta'), ('Confirmada', 'Confirmada'), ('Concluida', 'Concluida'), ('Cancelada', 'Cancelada')])
+    origin = StringField('Origin', validators=[InputRequired()])
+    destination = StringField('Destination', validators=[InputRequired()])
+    description = StringField('Description', validators=[Optional()])
+    created_at = DateTimeField('Created at', validators=[Optional()])
+    updated_at = DateTimeField('Updated at', validators=[Optional()])
+
+
+class CreateReservationForm(FlaskForm):
+    id = IntegerField('Id', validators=[Optional()])
+    user_id = IntegerField('User Id', validators=[InputRequired()])
+    ride_id = IntegerField('Ride Id', validators=[InputRequired()])
+    status = SelectField('Status', validators=[InputRequired()], choices=[('Aberta', 'Aberta'), ('Confirmada', 'Confirmada'), ('Concluida', 'Concluida'), ('Cancelada', 'Cancelada')])
+    is_driver = SelectField('Is Driver', validators=[InputRequired()], choices=[('False', 'False'), ('True', 'True')])
+    created_at = DateTimeField('Created at', validators=[Optional()])
+    updated_at = DateTimeField('Updated at', validators=[Optional()])
+
+
+class CreateRoleForm(FlaskForm):
+    id = IntegerField('Id', validators=[Optional()])
+    name = StringField('Name', validators=[InputRequired(), Length(min=1, max=80)])
+    description = StringField('Description', validators=[Optional(), Length(min=1, max=255)])
+
+
+class CreateUserRoleForm(FlaskForm):
+    user_id = IntegerField('User Id', validators=[InputRequired()])
+    role_id = IntegerField('Role Id', validators=[InputRequired()])

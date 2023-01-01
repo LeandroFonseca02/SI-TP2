@@ -9,6 +9,9 @@ from controllers.vehicles import vehicles
 from controllers.users import users
 from controllers.auth import auth, login_manager
 from controllers.db import db
+from models.reservation import Reservation
+from models.ride import Ride
+from models.user import User
 from utils import mail
 
 app = Flask(__name__)
@@ -42,7 +45,11 @@ with app.app_context():
 
 @app.route('/')
 def index_template():
-    return render_template('index.html', page='Dashboard')
+    rides = Ride.get_number_all_rides()
+    rides_completed = Ride.get_number_completed_rides()
+    users = User.get_number_users()
+    reservations = Reservation.get_number_reservations()
+    return render_template('index.html', page='Dashboard', users=users, rides=rides, rides_completed=rides_completed, reservations=reservations)
 
 
 app.register_blueprint(auth)

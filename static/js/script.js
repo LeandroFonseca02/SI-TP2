@@ -1,3 +1,10 @@
+function toggleDropdown() {
+    // dropdown = document.querySelector('.dropdown-menu');
+    // dropdown.closable = true;
+    // $('.dropdown-menu').dropdown('toggle')
+}
+
+
 function sendUploadImage() {
     document.getElementById("photoForm").submit();
 }
@@ -33,6 +40,43 @@ function deleteProfile(profile_id) {
 
 function deleteVehicle(vehicle_id) {
     fetch('/deletevehicle/'+vehicle_id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
+function deleteRide(ride_id) {
+    fetch('/deleteride/'+ride_id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
+function deleteReservatiom(id) {
+    fetch('/deletereservation/'+id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
+function deleteRole(id) {
+    fetch('/deleterole/'+id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
+function deleteRoleUser(id) {
+    ids = id.split(' ')
+    fetch('/deleteroleuser/'+ids[0]+'/'+ids[1], {
             method:"DELETE",
     }).then(response => {
         document.location.reload();
@@ -79,6 +123,59 @@ function getEditVehicleModal(id) {
     });
 }
 
+function getEditRideModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditRideModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editRideModal"+id).modal("toggle");
+
+    });
+}
+
+function getEditReservationModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditReservationModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editReservationModal"+id).modal("toggle");
+
+    });
+}
+
+function getEditRoleModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditRoleModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editRoleModal"+id).modal("toggle");
+
+    });
+}
+
+function getEditRoleUserModal(id) {
+    ids = id.split(' ');
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditRoleUserModal/'+ids[0]+'/'+ids[1], {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editRoleUserModal"+ids[0]+ ids[1]).modal("toggle");
+
+    });
+}
+
 function getDeleteUserModal(user_id) {
     modalWrapper = document.getElementById("modalWrapper")
     fetch('/getDeleteUserModal/'+user_id, {
@@ -113,8 +210,56 @@ function getDeleteVehicleModal(vehicle_id) {
         return response.text();
     }).then(html => {
         modalWrapper.innerHTML = html;
-        console.log(vehicle_id)
         $("#deleteVehicleModal"+vehicle_id).modal("toggle");
+    });
+}
+
+function getDeleteRideModal(ride_id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteRideModal/'+ride_id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#deleteRideModal"+ride_id).modal("toggle");
+    });
+}
+
+function getDeleteReservationModal(reservation_id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteReservationModal/'+reservation_id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#deleteReservationModal"+reservation_id).modal("toggle");
+    });
+}
+
+function getDeleteRoleModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteRoleModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#deleteRoleModal"+id).modal("toggle");
+    });
+}
+
+function getDeleteRoleUserModal(id) {
+    ids = id.split(' ');
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteRoleUserModal/'+ids[0]+'/'+ids[1], {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#deleteRoleUserModal"+ids[0]+ids[1]).modal("toggle");
     });
 }
 

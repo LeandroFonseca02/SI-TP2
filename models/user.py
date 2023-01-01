@@ -116,6 +116,18 @@ class User(db.Model, UserMixin):
 
         return data.get('user_id')
 
+
+    @staticmethod
+    def add_role(user_id, role_id):
+        user = User.get_user_by_id(user_id)
+        user.roles.append(role_id)
+        db.session.commit()
+
+
+    @staticmethod
+    def get_number_users():
+        return len(db.session.query(User).all())
+
     # def __repr__(self):
     #     return "<User %r>" % self.email
 

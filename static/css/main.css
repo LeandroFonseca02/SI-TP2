@@ -237,3 +237,11 @@
     box-shadow: rgba(0,0,0,0.6) 0 3px 7px inset;
     transform: translateY(2px);
 }
+
+.sidebar-item.active .sidebar-link:hover, .sidebar-item.active>.sidebar-link{
+    border-left-color: #0C727D!important;
+}
+
+.sidebar-link i, .sidebar-link svg, a.sidebar-link i, a.sidebar-link svg {
+    color: var(--ismat-ligth)!important;
+}

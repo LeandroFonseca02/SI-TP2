@@ -1,20 +1,20 @@
 
-<div class="modal fade" id="deleteVehicleModal{{vehicle.id}}"
+<div class="modal fade" id="deleteRideModal{{ride.id}}"
      data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="deleteVehicleModalLabel{{vehicle.id}}"
+     aria-labelledby="deleteRideModalLabel{{ride.id}}"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete Vehicle</h5>
+                <h5 class="modal-title">Delete Ride</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Tem a certeza que quer apagar o veiculo com id {{ vehicle.id }} do user com id {{ vehicle.user_id }}?</p>
+                <p>Tem a certeza que quer apagar o ride com id {{ ride.id }} do user com id {{ ride.user_id }}?</p>
             </div>
             <div class="modal-footer">
-                <a href="/vehicles" name="{{vehicle.id}}" class="btn btn-success" data-bs-dismiss="modal"
-                        onclick="deleteVehicle(this.name)">Sim
+                <a href="/rides" name="{{ride.id}}" class="btn btn-success" data-bs-dismiss="modal"
+                        onclick="deleteRide(this.name)">Sim
                 </a>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
             </div>

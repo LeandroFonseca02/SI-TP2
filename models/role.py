@@ -32,3 +32,30 @@ class Role(db.Model, RoleMixin):
     @staticmethod
     def get_all_users_roles():
         return db.session.query(roles_users_table).all()
+
+    @staticmethod
+    def create_role_admin(id, name, description):
+        role = Role(name=name, description=description)
+        if len(id) != 0:
+            role.id = int(id)
+        db.session.add(role)
+        db.session.commit()
+
+    @staticmethod
+    def edit_role_admin(role, id, name, description):
+        role.id = int(id)
+        role.name = name
+        role.description = description
+        db.session.commit()
+
+    @staticmethod
+    def delete_role_admin(id):
+        db.session.query(Role).filter(Role.id == int(id)).delete()
+        db.session.commit()
+
+    @staticmethod
+    def get_role_by_id(id):
+        return db.session.query(Role).filter(Role.id == int(id)).first()
+
+
+

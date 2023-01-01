@@ -88,6 +88,47 @@ class Reservation(db.Model):
         db.session.commit()
 
 
+    @staticmethod
+    def create_reservation_admin(id, user_id, ride_id, status, is_driver, created_at, updated_at):
+        reservation = Reservation(user_id=user_id, ride_id=ride_id, status=status, is_driver=eval(is_driver))
+        if len(id) != 0:
+            reservation.id = id
+        if len(created_at) != 0:
+            reservation.created_at = created_at
+        if len(updated_at) != 0:
+            reservation.updated_at = updated_at
+
+        db.session.add(reservation)
+        db.session.commit()
+
+
+    @staticmethod
+    def delete_reservation_admin(id):
+        db.session.query(Reservation).filter(Reservation.id == int(id)).delete()
+        db.session.commit()
+
+
+    @staticmethod
+    def edit_reservation_admin(reservation, id, user_id, ride_id, status, is_driver, created_at, updated_at):
+        reservation.id = int(id)
+        reservation.user_id = int(user_id)
+        reservation.ride_id = int(ride_id)
+        reservation.status = status
+        reservation.is_driver = eval(is_driver)
+        reservation.created_at = created_at
+        reservation.updated_at = updated_at
+        db.session.commit()
+
+
+    @staticmethod
+    def get_reservation_by_id(id):
+        return db.session.query(Reservation).filter(Reservation.id == int(id)).first()
+
+
+    @staticmethod
+    def get_number_reservations():
+        return len(db.session.query(Reservation).all())
+
     # def __init__(self, user_id, ride_id, created_at, updated_at):
     #     self.user_id = user_id
     #     self.ride_id = ride_id
