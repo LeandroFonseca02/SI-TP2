@@ -77,6 +77,15 @@ function deleteRoleUser(id) {
     });
 }
 
+function deleteRating(id) {
+    fetch('/deleterating/'+id, {
+            method:"DELETE",
+    }).then(response => {
+        document.location.reload();
+        return response.text();
+    });
+}
+
 function getEditUserModal(user_id) {
     modalWrapper = document.getElementById("modalWrapper")
     fetch('/getEditUserModal/'+user_id, {
@@ -169,6 +178,19 @@ function getEditRoleUserModal(id) {
     });
 }
 
+function getEditRatingModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getEditRatingModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#editRatingModal"+id).modal("toggle");
+
+    });
+}
+
 function getDeleteUserModal(user_id) {
     modalWrapper = document.getElementById("modalWrapper")
     fetch('/getDeleteUserModal/'+user_id, {
@@ -253,6 +275,18 @@ function getDeleteRoleUserModal(id) {
     }).then(html => {
         modalWrapper.innerHTML = html;
         $("#deleteRoleUserModal"+ids[0]+ids[1]).modal("toggle");
+    });
+}
+
+function getDeleteRatingModal(id) {
+    modalWrapper = document.getElementById("modalWrapper")
+    fetch('/getDeleteRatingModal/'+id, {
+        method: "GET"
+    }).then(response => {
+        return response.text();
+    }).then(html => {
+        modalWrapper.innerHTML = html;
+        $("#deleteRatingModal"+id).modal("toggle");
     });
 }
 

@@ -104,3 +104,13 @@ class CreateRoleForm(FlaskForm):
 class CreateUserRoleForm(FlaskForm):
     user_id = IntegerField('User Id', validators=[InputRequired()])
     role_id = IntegerField('Role Id', validators=[InputRequired()])
+
+
+class CreateRatingForm(FlaskForm):
+    id = IntegerField('Id', validators=[Optional()])
+    user_id = IntegerField('User Id', validators=[InputRequired()])
+    ride_id = IntegerField('Ride Id', validators=[InputRequired()])
+    passenger_id = IntegerField('Passenger Id', validators=[InputRequired()])
+    rating = IntegerField('Rating', validators=[InputRequired()])
+    created_at = DateTimeField('Created at', validators=[Optional()])
+    updated_at = DateTimeField('Updated at', validators=[Optional()])

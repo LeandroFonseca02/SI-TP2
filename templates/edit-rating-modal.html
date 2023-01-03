@@ -1,0 +1,49 @@
+<div class="modal fade" id="editRatingModal{{rating.id}}" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editRatingModalLabel{{rating.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRatingModalLabel{{rating.id}}">Edit Rating</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="/editRating/{{rating.id}}" method="POST">
+                    <div class="col-md-6">
+                        {{form.id.label(class_='form-label')}}
+                        {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.user_id.label(class_='form-label')}}
+                        {{form.user_id(class_='form-control input-shadow form-ismat', placeholder='User
+                        Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.ride_id.label(class_='form-label')}}
+                        {{form.ride_id(class_='form-control input-shadow form-ismat', placeholder='Ride Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.passenger_id.label(class_='form-label')}}
+                        {{form.passenger_id(class_='form-control input-shadow form-ismat', placeholder='Passenger
+                        Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.rating.label(class_='form-label')}}
+                        {{form.rating(class_='form-control input-shadow form-ismat', placeholder='Rating')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.created_at.label(class_='form-label')}}
+                        {{form.created_at(class_='form-control input-shadow form-ismat', placeholder='Created At')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.updated_at.label(class_='form-label')}}
+                        {{form.updated_at(class_='form-control input-shadow form-ismat', placeholder='Updated At')}}
+                    </div>
+                    <div class="col-12 d-grid">
+                        <button type="submit" class="btn-ismat-large">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

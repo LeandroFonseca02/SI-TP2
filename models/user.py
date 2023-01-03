@@ -1,9 +1,9 @@
 import datetime
+import json
 from dataclasses import dataclass
 import jwt
 from flask_security import UserMixin
 
-from config.config import SECRET_KEY
 from controllers.db import db
 from models.role import roles_users_table, Role
 
@@ -88,6 +88,10 @@ class User(db.Model, UserMixin):
         return self.email
 
     def get_reset_token(self, expire_sec=1800):
+        with open('./config/config.json') as file:
+            data = json.load(file)
+
+        SECRET_KEY = data['SECRET_KEY']
         payload = {
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=expire_sec),
             'iat': datetime.datetime.utcnow(),
@@ -104,6 +108,10 @@ class User(db.Model, UserMixin):
     @staticmethod
     def verify_reset_token(token):
         try:
+            with open('./config/config.json') as file:
+                data = json.load(file)
+
+            SECRET_KEY = data['SECRET_KEY']
             data = jwt.decode(
                 token,
                 str(SECRET_KEY),

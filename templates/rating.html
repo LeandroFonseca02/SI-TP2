@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block body %}
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <div class="row">
+            <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+                <div class="card flex-fill">
+                    <div class="card-header">
+
+                        <h5 class="card-title mb-0">Ratings</h5>
+                        <button class="btn btn-success mt-3" data-bs-toggle="modal"
+                                data-bs-target="#modalCreateRating">Add Rating to User
+                        </button>
+                    </div>
+                    <table class="table table-hover my-0">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th class="d-none d-xl-table-cell">User Id</th>
+                            <th class="d-none d-xl-table-cell">Ride Id</th>
+                            <th class="d-none d-xl-table-cell">Passenger Id</th>
+                            <th class="d-none d-xl-table-cell">Rating</th>
+                            <th class="d-none d-xl-table-cell">Created At</th>
+                            <th class="d-none d-xl-table-cell">Updated At</th>
+                            <th class="d-none d-xl-table-cell">Actions</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for rating in ratings %}
+                        <tr>
+                            <td>{{ rating.id }}</td>
+                            <td class="d-none d-xl-table-cell">{{ rating.user_id }}</td>
+                            <td class="d-none d-xl-table-cell">{{ rating.ride_id }}</td>
+                            <td class="d-none d-xl-table-cell">{{ rating.passenger_id }}</td>
+                            <td class="d-none d-xl-table-cell">{{ rating.rating }}</td>
+                            <td class="d-none d-xl-table-cell">{{ rating.created_at }}</td>
+                            <td class="d-none d-xl-table-cell">{{ rating.updated_at }}</td>
+                            <td class="d-none d-md-table-cell">
+                                <a href="#editRatingModal{{rating.id}}"
+                                   class="btn btn-primary"
+                                   name="{{rating.id}}"
+                                   onclick="getEditRatingModal(this.name)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-edit align-middle">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                </a>
+                                <a href="#deleteRatingModal{{rating.id}}"
+                                   class="btn btn-danger"
+                                   name="{{rating.id}}"
+                                   onclick="getDeleteRatingModal(this.name)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-trash-2 align-middle">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal fade" id="modalCreateRating" data-bs-keyboard="false" tabindex="-1"
+                     aria-labelledby="modalCreateRatingLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCreateRatingLabel">Rating</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="row g-3" action="/createRating" method="POST">
+                                    <div class="col-md-6">
+                                        {{form.id.label(class_='form-label')}}
+                                        {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{form.user_id.label(class_='form-label')}}
+                                        {{form.user_id(class_='form-control input-shadow form-ismat', placeholder='User
+                                        Id')}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{form.ride_id.label(class_='form-label')}}
+                                        {{form.ride_id(class_='form-control input-shadow form-ismat', placeholder='Ride Id')}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{form.passenger_id.label(class_='form-label')}}
+                                        {{form.passenger_id(class_='form-control input-shadow form-ismat', placeholder='Passenger
+                                        Id')}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{form.rating.label(class_='form-label')}}
+                                        {{form.rating(class_='form-control input-shadow form-ismat', placeholder='Rating')}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{form.created_at.label(class_='form-label')}}
+                                        {{form.created_at(class_='form-control input-shadow form-ismat', placeholder='Created At')}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{form.updated_at.label(class_='form-label')}}
+                                        {{form.updated_at(class_='form-control input-shadow form-ismat', placeholder='Updated At')}}
+                                    </div>
+                                    <div class="col-12 d-grid">
+                                        <button type="submit" class="btn-ismat-large">Criar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="modalWrapper"></div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+{% endblock %}
