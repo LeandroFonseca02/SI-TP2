@@ -55,7 +55,7 @@ class CreateProfileForm(FlaskForm):
     registration_date = DateTimeField('Registration Date', validators=[Optional()])
     photo = FileField('Photo', validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png'])])
     phone = StringField('Telemóvel', validators=[InputRequired(), Length(min=9, max=30)])
-    classification = DecimalField('Classificação', validators=[Optional(), NumberRange(min=1, max=5, message='A classificação deve ser entre 1 e 5.')])
+    classification = DecimalField('Classificação', validators=[Optional(), NumberRange(min=0, max=5, message='A classificação deve ser entre 1 e 5.')])
 
 
 class CreateVehicleForm(FlaskForm):

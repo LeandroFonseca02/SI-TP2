@@ -3,10 +3,8 @@ import json
 from flask import Flask, render_template
 from flask_login import login_required, current_user
 
-from config.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_TRACK_MODIFICATIONS, SECRET_KEY, MAIL_SERVER, MAIL_PORT, \
-    MAIL_USERNAME, MAIL_PASSWORD, MAIL_USE_TLS, MAIL_USE_SSL
 from controllers.ratings import ratings
-from controllers.profiles import UPLOAD_FOLDER, profiles
+from controllers.profiles import profiles
 from controllers.reservations import reservations
 from controllers.rides import rides
 from controllers.roles import roles
