@@ -1,0 +1,40 @@
+<div class="modal fade" id="editUserModal{{user.id}}" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="editUserModalLabel{{user.id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel{{user.id}}">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" action="/editUser/{{user.id}}" method="POST">
+                    <div class="col-md-6">
+                        {{form.id.label(class_='form-label')}}
+                        {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.email.label(class_='form-label')}}
+                        {{form.email(class_='form-control input-shadow form-ismat',
+                        placeholder='Email')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.password.label(class_='form-label')}}
+                        {{form.password(class_='form-control input-shadow form-ismat',
+                        placeholder='Password')}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.active.label(class_='form-label')}}
+                        {{form.active(class_='form-control input-shadow form-ismat',
+                        placeholder='Active')}}
+                    </div>
+                    <div class="col-12 d-grid">
+                        <button type="submit" class="btn-ismat-large">
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

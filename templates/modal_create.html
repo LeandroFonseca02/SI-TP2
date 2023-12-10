@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+  <title></title>
+
+  <link href="../static/css/main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+</head>
+
+<body>
+
+
+<button data-bs-toggle="modal" data-bs-target="#modalCreateUser">asd</button>
+
+<!-- Modal Users-->
+<div class="modal fade" id="modalCreateUser" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="modalCreateUserLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCreateUserLabel">Users</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action="/createUser" method="POST">
+          <div class="col-md-6">
+            {{form.id.label(class_='form-label')}}
+            {{form.id(class_='form-control input-shadow form-ismat', placeholder='Id')}}
+<!--            <label class="form-label">ID</label>-->
+<!--            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo">-->
+          </div>
+          <div class="col-md-6">
+            {{form.email.label(class_='form-label')}}
+            {{form.email(class_='form-control input-shadow form-ismat', placeholder='Email')}}
+<!--            <label for="inputCriarLugaresDisponiveis" class="form-label">Email</label>-->
+<!--            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"-->
+<!--                   placeholder="Lugares Disponíveis" id="inputCriarLugaresDisponiveis">-->
+          </div>
+          <div class="col-md-6">
+            {{form.password.label(class_='form-label')}}
+            {{form.password(class_='form-control input-shadow form-ismat', placeholder='Password')}}
+<!--            <label for="inputCriarOrigem" class="form-label">Password</label>-->
+<!--            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"-->
+<!--                   placeholder="Origem" id="inputCriarOrigem">-->
+          </div>
+          <div class="col-md-6">
+            {{form.active.label(class_='form-label')}}
+            {{form.active(class_='form-control input-shadow form-ismat', placeholder='Active')}}
+<!--            <label for="inputVeiculo" class="form-label">Active</label>-->
+<!--            <select class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"-->
+<!--                    id="inputVeiculo">-->
+<!--              <option selected> True </option>-->
+<!--              <option selected> False </option>-->
+<!--            </select>-->
+          </div>
+          <div class="col-12 d-grid">
+            <button type="submit" class="btn-ismat-large">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Profiles-->
+<div class="modal fade" id="modalProfiles" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Profiles</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action="/createRide" method="POST">
+          <div class="col-md-6">
+            <label class="form-label">ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">User ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="User ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">First Name</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="First Name" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Last Name</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="Last Name" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Registration Date</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="Registration Date" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarLugaresDisponiveis" class="form-label">Photo</label>
+            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"
+                   placeholder="Photo" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Phone Number</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Phone Number" id="inputCriarOrigem">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Classification</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Classification" id="inputCriarOrigem">
+          </div>
+          <div class="col-12 d-grid">
+            <button type="submit" class="btn-ismat-large">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Vehicles-->
+<div class="modal fade" id="modalVehicles" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Vehicles</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action="/createRide" method="POST">
+          <div class="col-md-6">
+            <label class="form-label">ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">User ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="User ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">License Plate</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="First Name" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Brand</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="Last Name" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Model</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="Registration Date" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarLugaresDisponiveis" class="form-label">Color</label>
+            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"
+                   placeholder="Photo" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputVeiculo" class="form-label">Is Deleted</label>
+            <select class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                    id="inputVeiculo">
+              <option selected> True </option>
+              <option selected> False </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Created At</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Phone Number" id="inputCriarOrigem">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Update At</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Phone Number" id="inputCriarOrigem">
+          </div>
+          <div class="col-12 d-grid">
+            <button type="submit" class="btn-ismat-large">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Rides-->
+<div class="modal fade" id="modalRides" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Rides</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action="/createRide" method="POST">
+          <div class="col-md-6">
+            <label class="form-label">ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">User ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="User ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Vehicle ID</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Vehicle ID" id="inputCriarOrigem">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Date</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="Date" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Hour</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="Hour" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Origin</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="Origin" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarLugaresDisponiveis" class="form-label">Destination</label>
+            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"
+                   placeholder="Destination" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarLugaresDisponiveis" class="form-label">Nr Available Seats</label>
+            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"
+                   placeholder="Nr Available Seats" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputVeiculo" class="form-label">Status</label>
+            <select class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                    id="Status">
+              <option selected> True </option>
+              <option selected> False </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Description</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Description" id="inputCriarOrigem">
+          </div>
+           <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Create At</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Create At" id="inputCriarOrigem">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Update At</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Update At" id="inputCriarOrigem">
+          </div>
+          <div class="col-12 d-grid">
+            <button type="submit" class="btn-ismat-large">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Roles-->
+<div class="modal fade" id="modalRoles" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Users</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action="/createRide" method="POST">
+          <div class="col-md-6">
+            <label class="form-label">ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarLugaresDisponiveis" class="form-label">Name</label>
+            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"
+                   placeholder="Name" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarOrigem" class="form-label">Description</label>
+            <input type="text" name="origin" class="form-control input-shadow form-ismat inputOrigem"
+                   placeholder="Description" id="inputCriarOrigem">
+          </div>
+          <div class="col-12 d-grid">
+            <button type="submit" class="btn-ismat-large">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Roles-->
+<div class="modal fade" id="modalUserRoles" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">User Roles</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action="/createRide" method="POST">
+          <div class="col-md-6">
+            <label class="form-label">User ID</label>
+            <input class="form-select input-shadow form-ismat" name="car" aria-label="Veículo"
+                   placeholder="User ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-md-6">
+            <label for="inputCriarLugaresDisponiveis" class="form-label">Role ID</label>
+            <input type="text" name="availableSeats" class="form-control input-shadow form-ismat"
+                   placeholder="Role ID" id="inputCriarLugaresDisponiveis">
+          </div>
+          <div class="col-12 d-grid">
+            <button type="submit" class="btn-ismat-large">Criar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

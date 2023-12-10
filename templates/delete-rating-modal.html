@@ -1,0 +1,23 @@
+
+<div class="modal fade" id="deleteRatingModal{{rating.id}}"
+     data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="deleteRatingModalLabel{{rating.id}}"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Rating</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem a certeza que quer apagar o rating com id {{ rating.id }}?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/ratings" name="{{rating.id}}" class="btn btn-success" data-bs-dismiss="modal"
+                        onclick="deleteRating(this.name)">Sim
+                </a>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
+            </div>
+        </div>
+    </div>
+</div>
